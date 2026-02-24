@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergePowerpoints", "MergePowerpoints\MergePowerpoints.csproj", "{FBC634EB-EACA-4A84-BF54-46D66912720E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfLibrary", "PdfLibrary\PdfLibrary.csproj", "{8458ED65-F522-4A54-8213-DFF02F6B4FEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFTools", "PDFTools\PDFTools.csproj", "{0352D6D6-9D73-4AD3-A2E0-ABBC8E35F98E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBC634EB-EACA-4A84-BF54-46D66912720E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC634EB-EACA-4A84-BF54-46D66912720E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC634EB-EACA-4A84-BF54-46D66912720E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC634EB-EACA-4A84-BF54-46D66912720E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8458ED65-F522-4A54-8213-DFF02F6B4FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8458ED65-F522-4A54-8213-DFF02F6B4FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8458ED65-F522-4A54-8213-DFF02F6B4FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8458ED65-F522-4A54-8213-DFF02F6B4FEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0352D6D6-9D73-4AD3-A2E0-ABBC8E35F98E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0352D6D6-9D73-4AD3-A2E0-ABBC8E35F98E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0352D6D6-9D73-4AD3-A2E0-ABBC8E35F98E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0352D6D6-9D73-4AD3-A2E0-ABBC8E35F98E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

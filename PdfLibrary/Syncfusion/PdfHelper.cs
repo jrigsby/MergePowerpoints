@@ -1,0 +1,38 @@
+﻿using Syncfusion.Pdf;
+using Syncfusion.Pdf.Parsing;
+
+namespace PdfLibrary.Syncfusion;
+
+public static class PdfHelper {
+    public static List<MemoryStream> SplitPdfStream(MemoryStream inputStream, int pagesPerChunk) {
+        var outputStreams = new List<MemoryStream>();
+
+        // 1. Load the document (using your chosen library's specific class, e.g., PdfLoadedDocument)
+        using (var document = new PdfLoadedDocument(inputStream)) {
+            int totalPages = document.Pages.Count;
+
+            for (int i = 0; i < totalPages; i += pagesPerChunk) {
+                // 2. Determine the page range for the current chunk
+                var startPage = i + 1;
+                var endPage = Math.Min(i + pagesPerChunk, totalPages);
+
+                // 3. Create a new document with the selected pages
+                var newDocument = new PdfDocument();
+
+                newDocument.ImportPageRange(document, startPage - 1, endPage - 1);
+
+                // 4. Save the new document to a memory stream
+                var outputStream = new MemoryStream();
+                newDocument.Save(outputStream);
+
+                outputStream.Position = 0; // Reset stream position for reading
+                outputStreams.Add(outputStream);
+            }
+
+            // 5. Close the original document
+            document.Close(true);
+        }
+
+        return outputStreams;
+    }
+}
