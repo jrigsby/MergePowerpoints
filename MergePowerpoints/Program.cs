@@ -35,9 +35,9 @@ class Program {
 
                     // 4. All changes are automatically saved when the new document is disposed of (at the end of the using statement).
 
-
+                    var telerikHelper = new PdfLibrary.Telerik.TelerikPdfHelper();
                     using (var stream = new MemoryStream(File.ReadAllBytes(pdfPath))) {
-                        var pieces = PdfLibrary.Telerik.TelerikPdfHelper.SplitPdfStream(stream, Constants.ChunkSize);
+                        var pieces = telerikHelper.SplitPdfStream(stream, Constants.ChunkSize);
                         int i = 0;
                         foreach (var piece in pieces) {
                             i++;

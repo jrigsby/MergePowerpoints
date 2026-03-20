@@ -3,8 +3,8 @@ using Syncfusion.Pdf.Parsing;
 
 namespace PdfLibrary.Syncfusion;
 
-public static class PdfHelper {
-    public static List<MemoryStream> SplitPdfStream(MemoryStream inputStream, int pagesPerChunk) {
+public class PdfHelper: IPdfHelper {
+    public List<MemoryStream> SplitPdfStream(MemoryStream inputStream, int pagesPerChunk) {
         var outputStreams = new List<MemoryStream>();
 
         // 1. Load the document (using your chosen library's specific class, e.g., PdfLoadedDocument)
@@ -36,7 +36,7 @@ public static class PdfHelper {
         return outputStreams;
     }
 
-    public static MemoryStream MergePdfStreams(List<Stream> streams) {
+    public MemoryStream MergePdfStreams(List<Stream> streams) {
         var outputStream = new MemoryStream();
         var mergedDocument = new PdfDocument();
 
@@ -50,7 +50,7 @@ public static class PdfHelper {
         return outputStream;
     }
 
-    public static MemoryStream MergePdfStreams(List<FileStream> fileStreams) {
+    public MemoryStream MergePdfStreams(List<FileStream> fileStreams) {
         var outputStream = new MemoryStream();
         var mergedDocument = new PdfDocument();
 
@@ -63,7 +63,7 @@ public static class PdfHelper {
         return outputStream;
     }
 
-    public static MemoryStream MergePDFFiles(List<string> filePaths) {
+    public MemoryStream MergePdfFiles(List<string> filePaths) {
         var outputStream = new MemoryStream();
         var mergedDocument = new PdfDocument();
         foreach (var filePath in filePaths) {

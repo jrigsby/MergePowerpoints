@@ -10,8 +10,8 @@ namespace PdfLibrary.PdfSharp;
 // used within this package.
 
 // The library is a .NET Core/netstandard 2.0 port of the original PDFsharp. 
-public static class PdfHelper {
-    public static List<string> SplitPdf(string filePath, int pagesPerChunk, string outputDirectory = "",
+public class PdfHelper: IPdfHelper {
+    public List<string> SplitPdf(string filePath, int pagesPerChunk, string outputDirectory = "",
         string outputFileNameFormat = "") {
         var files = new List<string>();
         var fileName = Path.GetFileName(filePath);
@@ -78,7 +78,7 @@ public static class PdfHelper {
         return files;
     }
 
-    private static string LeadingZero(int number) {
+    private string LeadingZero(int number) {
         if (number < 10) {
             return "0" + number;
         }
@@ -86,7 +86,7 @@ public static class PdfHelper {
         return number.ToString();
     }
 
-    public static List<MemoryStream> SplitPdfStream(MemoryStream inputStream, int pagesPerChunk) {
+    public List<MemoryStream> SplitPdfStream(MemoryStream inputStream, int pagesPerChunk) {
         var outputStreams = new List<MemoryStream>();
 
         // 1. Load the document (using your chosen library's specific class, e.g., PdfLoadedDocument)
@@ -122,7 +122,7 @@ public static class PdfHelper {
         return outputStreams;
     }
 
-    public static MemoryStream MergePdfStreams(List<Stream> streams) {
+    public MemoryStream MergePdfStreams(List<Stream> streams) {
         var outputStream = new MemoryStream();
         var mergedDocument = new PdfDocument();
         foreach (var stream in streams) {
@@ -140,7 +140,7 @@ public static class PdfHelper {
         return outputStream;
     }
 
-    public static MemoryStream MergePDFFiles(List<string> filePaths) {
+    public MemoryStream MergePdfFiles(List<string> filePaths) {
         var outputStream = new MemoryStream();
         var mergedDocument = new PdfDocument();
         foreach (var filePath in filePaths) {

@@ -67,14 +67,15 @@ public partial class PdfToPowerPointControl : UserControl {
             
             var templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", templateName);
             var destination = Path.Combine(outputDirectory, filename.EndsWith(".pptx") ? filename : filename + ".pptx");
-            
+
+            var pdfSharpHelper = new PdfLibrary.PdfSharp.PdfHelper();
             using (var template = PresentationDocument.CreateFromTemplate(templatePath)) {
 
                 using (var output = template.Clone(destination)) {
                     using (var stream = new MemoryStream(File.ReadAllBytes(pdfPath))) {
                         //PowerPoint conversion is limited to a PDF of 3 pages. To work with this, we will
                         //convert the current PDF into separate files with a max page size of 3.
-                        var pieces = PdfLibrary.PdfSharp.PdfHelper.SplitPdfStream(stream, Constants.PdfToPowerPointConversionChunkSize);
+                        var pieces = pdfSharpHelper.SplitPdfStream(stream, Constants.PdfToPowerPointConversionChunkSize);
                         var i = 0;
                         foreach (var piece in pieces) {
                             i++;

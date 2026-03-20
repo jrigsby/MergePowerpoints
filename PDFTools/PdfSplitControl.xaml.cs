@@ -47,12 +47,13 @@ public partial class PdfSplitControl : UserControl {
         }
 
         try {
-            //PdfLibrary.PdfSharp.PdfHelper.SplitPdf(pdfPath, 1, "", "{Name} - Page {StartPage}.pdf");
-            //PdfLibrary.PdfSharp.PdfHelper.SplitPdf(pdfPath, Constants.ChunkSize);
+            var pdfSharpHelper = new PdfLibrary.PdfSharp.PdfHelper();
+            //pdfSharpHelper.SplitPdf(pdfPath, 1, "", "{Name} - Page {StartPage}.pdf");
+            //pdfSharpHelper.SplitPdf(pdfPath, Constants.ChunkSize);
             // using (var stream = new MemoryStream(File.ReadAllBytes(pdfPath))) {
-            //     var x = PdfLibrary.PdfSharp.PdfHelper.SplitPdfStream(stream, Constants.ChunkSize);
+            //     var x = pdfSharpHelper.SplitPdfStream(stream, Constants.ChunkSize);
             // }
-            var files = PdfLibrary.PdfSharp.PdfHelper.SplitPdf(filePath, pagesPerChunk, outputDirectory, filenameFormat);
+            var files = pdfSharpHelper.SplitPdf(filePath, pagesPerChunk, outputDirectory, filenameFormat);
             Results.Clear();
             foreach (var file in files) {
                 Results.Add(new FileResult { Path = file });

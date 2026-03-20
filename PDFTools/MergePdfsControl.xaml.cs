@@ -60,6 +60,8 @@ public partial class MergePdfsControl : UserControl, INotifyPropertyChanged {
         }
         
         try {
+            var pdfSharpHelper = new PdfLibrary.PdfSharp.PdfHelper();
+            
             var path = Path.Combine(outputDirectory, filename);
             var findOutput = Results.SingleOrDefault(x => x.Path==path);
             if(findOutput!=null) Results.Remove(findOutput);
@@ -70,9 +72,9 @@ public partial class MergePdfsControl : UserControl, INotifyPropertyChanged {
             // foreach (var file in Results.Select(x => x.Path).ToList()) {
             //     s.Add(new MemoryStream(File.ReadAllBytes(file)));
             // }
-            // var stream = PdfLibrary.PdfSharp.PdfHelper.MergePdfStreams(s);
+            // var stream = pdfSharpHelper.MergePdfStreams(s);
             //option 2
-            var stream = PdfLibrary.PdfSharp.PdfHelper.MergePDFFiles(Results.Select(x=>x.Path).ToList());
+            var stream = pdfSharpHelper.MergePdfFiles(Results.Select(x=>x.Path).ToList());
             
             FileStream targetStream = File.OpenWrite(path);
             byte[] buffer = new byte[2048];
@@ -108,6 +110,7 @@ public partial class MergePdfsControl : UserControl, INotifyPropertyChanged {
         }
         
         try {
+            var syncFusionHelper = new PdfLibrary.Syncfusion.PdfHelper();
             var path = Path.Combine(outputDirectory, filename);
             var findOutput = Results.SingleOrDefault(x => x.Path==path);
             if(findOutput!=null) Results.Remove(findOutput);
@@ -118,17 +121,17 @@ public partial class MergePdfsControl : UserControl, INotifyPropertyChanged {
             // foreach (var file in Results.Select(x => x.Path).ToList()) {
             //     s.Add(new FileStream(file, FileMode.Open, FileAccess.Read));
             // }
-            // var stream = PdfLibrary.Syncfusion.PdfHelper.MergePdfStreams(s);
+            // var stream = syncFusionHelper.MergePdfStreams(s);
             
             //option 2
             // var s = new List<Stream>();
             // foreach (var file in Results.Select(x => x.Path).ToList()) {
             //     s.Add(new MemoryStream(File.ReadAllBytes(file)));
             // }
-            // var stream = PdfLibrary.Syncfusion.PdfHelper.MergePdfStreams(s);
+            // var stream = syncFusionHelper.MergePdfStreams(s);
             
             //option 3
-            var stream = PdfLibrary.Syncfusion.PdfHelper.MergePDFFiles(Results.Select(x=>x.Path).ToList());
+            var stream = syncFusionHelper.MergePdfFiles(Results.Select(x=>x.Path).ToList());
             
             FileStream targetStream = File.OpenWrite(path);
             byte[] buffer = new byte[2048];
@@ -164,6 +167,7 @@ public partial class MergePdfsControl : UserControl, INotifyPropertyChanged {
         }
         
         try {
+            var telerikHelper = new PdfLibrary.Telerik.TelerikPdfHelper();
             var path = Path.Combine(outputDirectory, filename);
             var findOutput = Results.SingleOrDefault(x => x.Path==path);
             if(findOutput!=null) Results.Remove(findOutput);
@@ -174,10 +178,10 @@ public partial class MergePdfsControl : UserControl, INotifyPropertyChanged {
             // foreach (var file in Results.Select(x => x.Path).ToList()) {
             //     s.Add(new MemoryStream(File.ReadAllBytes(file)));
             // }
-            // var stream = PdfLibrary.Telerik.TelerikPdfHelper.MergePdfStreams(s);
+            // var stream = telerikHelper.MergePdfStreams(s);
             
             //option2
-            var stream = PdfLibrary.Telerik.TelerikPdfHelper.MergePDFFiles(Results.Select(x=>x.Path).ToList());
+            var stream = telerikHelper.MergePdfFiles(Results.Select(x=>x.Path).ToList());
             
             FileStream targetStream = File.OpenWrite(path);
             byte[] buffer = new byte[2048];

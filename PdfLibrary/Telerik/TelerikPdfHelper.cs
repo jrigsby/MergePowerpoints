@@ -4,8 +4,8 @@ using Telerik.Windows.Documents.Fixed.Model;
 
 namespace PdfLibrary.Telerik;
 
-public static class TelerikPdfHelper {
-    public static List<MemoryStream> SplitPdfStream(MemoryStream inputStream, int pagesPerChunk) {
+public class TelerikPdfHelper : IPdfHelper {
+    public List<MemoryStream> SplitPdfStream(MemoryStream inputStream, int pagesPerChunk) {
         var outputStreams = new List<MemoryStream>();
         PdfFormatProvider provider = new PdfFormatProvider();
         RadFixedDocument document = provider.Import(inputStream);
@@ -49,47 +49,39 @@ public static class TelerikPdfHelper {
         return outputStreams;
     }
 
-    public static MemoryStream MergePdfStreams(List<Stream> streams) {
+    public MemoryStream MergePdfStreams(List<Stream> streams) {
         var outputStream = new MemoryStream();
-        using (PdfStreamWriter fileWriter = new PdfStreamWriter(outputStream, leaveStreamOpen: true))
-        {
-            foreach (var sourceStream in streams)
-            {
-                using (PdfFileSource fileSource = new PdfFileSource(sourceStream))
-                {
-                    foreach (var page in fileSource.Pages)
-                    {
-                        using (var pageWriter = fileWriter.BeginPage(page.Size))
-                        {
+        using (PdfStreamWriter fileWriter = new PdfStreamWriter(outputStream, leaveStreamOpen: true)) {
+            foreach (var sourceStream in streams) {
+                using (PdfFileSource fileSource = new PdfFileSource(sourceStream)) {
+                    foreach (var page in fileSource.Pages) {
+                        using (var pageWriter = fileWriter.BeginPage(page.Size)) {
                             pageWriter.WriteContent(page);
                         }
                     }
                 }
             }
         }
+
         outputStream.Position = 0;
         return outputStream;
     }
 
-    public static MemoryStream MergePDFFiles(List<string> filePaths) {
+    public MemoryStream MergePdfFiles(List<string> filePaths) {
         var outputStream = new MemoryStream();
-        using (PdfStreamWriter fileWriter = new PdfStreamWriter(outputStream, leaveStreamOpen: true))
-        {
-            foreach (var filePath in filePaths)
-            {
-                using (PdfFileSource fileSource = new PdfFileSource(File.OpenRead(filePath)))
-                {
-                    foreach (var page in fileSource.Pages)
-                    {
-                        using (var pageWriter = fileWriter.BeginPage(page.Size))
-                        {
+        using (PdfStreamWriter fileWriter = new PdfStreamWriter(outputStream, leaveStreamOpen: true)) {
+            foreach (var filePath in filePaths) {
+                using (PdfFileSource fileSource = new PdfFileSource(File.OpenRead(filePath))) {
+                    foreach (var page in fileSource.Pages) {
+                        using (var pageWriter = fileWriter.BeginPage(page.Size)) {
                             pageWriter.WriteContent(page);
                         }
                     }
                 }
             }
         }
+
         outputStream.Position = 0;
         return outputStream;
-        }
     }
+}
