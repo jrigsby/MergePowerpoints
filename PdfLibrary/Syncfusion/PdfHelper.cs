@@ -35,4 +35,48 @@ public static class PdfHelper {
 
         return outputStreams;
     }
+
+    public static MemoryStream MergePdfStreams(List<Stream> streams) {
+        var outputStream = new MemoryStream();
+        var mergedDocument = new PdfDocument();
+
+
+        PdfDocumentBase.Merge(mergedDocument, streams.ToArray());
+
+        mergedDocument.Save(outputStream);
+        mergedDocument.Close(true);
+
+        outputStream.Position = 0;
+        return outputStream;
+    }
+
+    public static MemoryStream MergePdfStreams(List<FileStream> fileStreams) {
+        var outputStream = new MemoryStream();
+        var mergedDocument = new PdfDocument();
+
+        PdfDocumentBase.Merge(mergedDocument, fileStreams.ToArray<Stream>());
+
+        mergedDocument.Save(outputStream);
+        mergedDocument.Close(true);
+
+        outputStream.Position = 0;
+        return outputStream;
+    }
+
+    public static MemoryStream MergePDFFiles(List<string> filePaths) {
+        var outputStream = new MemoryStream();
+        var mergedDocument = new PdfDocument();
+        foreach (var filePath in filePaths) {
+            using (FileStream stream1 = new FileStream(filePath, FileMode.Open, FileAccess.Read)) {
+                Stream[] streams = { stream1 };
+                PdfDocumentBase.Merge(mergedDocument, streams);
+            }
+        }
+        
+        mergedDocument.Save(outputStream);
+        mergedDocument.Close(true);
+
+        outputStream.Position = 0;
+        return outputStream;
+    }
 }

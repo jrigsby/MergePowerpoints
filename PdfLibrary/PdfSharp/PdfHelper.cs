@@ -121,4 +121,42 @@ public static class PdfHelper {
 
         return outputStreams;
     }
+
+    public static MemoryStream MergePdfStreams(List<Stream> streams) {
+        var outputStream = new MemoryStream();
+        var mergedDocument = new PdfDocument();
+        foreach (var stream in streams) {
+            using (var document = PdfReader.Open(stream, PdfDocumentOpenMode.Import)) {
+                foreach (var page in document.Pages) {
+                    mergedDocument.AddPage(page);
+                }
+            }
+        }
+
+        mergedDocument.Save(outputStream);
+        mergedDocument.Close();
+
+        outputStream.Position = 0;
+        return outputStream;
+    }
+
+    public static MemoryStream MergePDFFiles(List<string> filePaths) {
+        var outputStream = new MemoryStream();
+        var mergedDocument = new PdfDocument();
+        foreach (var filePath in filePaths) {
+            using (var fs = File.OpenRead(filePath)) {
+                using (var document = PdfReader.Open(fs, PdfDocumentOpenMode.Import)) {
+                    foreach (var page in document.Pages) {
+                        mergedDocument.AddPage(page);
+                    }
+                }
+            }
+        }
+
+        mergedDocument.Save(outputStream);
+        mergedDocument.Close();
+
+        outputStream.Position = 0;
+        return outputStream;
+    }
 }

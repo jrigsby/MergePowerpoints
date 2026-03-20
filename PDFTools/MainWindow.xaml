@@ -4,12 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFTools"
+        xmlns:vm="clr-namespace:PDFTools.Models"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
     <Grid>
         <TabControl>
             <TabItem Header="Split PDF">
                 <local:PdfSplitControl />
+            </TabItem>
+            <TabItem Header="Merge PDFs">
+                <local:MergePdfsControl />
             </TabItem>
             <TabItem Header="PDF to PowerPoint">
                 <local:PdfToPowerPointControl />
