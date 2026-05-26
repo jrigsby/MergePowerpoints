@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Validation;
-//using MergePowerpoints.OpenXml;
+using MergePowerpoints.OpenXml;
 using PdfLibrary.OpenXml;
 
 namespace MergePowerpoints;
@@ -22,12 +22,16 @@ class Program {
         //List<string> files = [];
 
         //string templatePath ="C:\\Temp\\LandscapeTemplate.pptx";
-        string templatePath ="D:\\Temp\\MixTemplate.pptx";
+        //string templatePath ="D:\\Temp\\MixTemplate.pptx";
         string destination ="D:\\Temp\\merged.pptx";
         string pdfPath = "D:\\Temp\\big.pdf";
         try {
             //PdfToPptConverter.ConvertToSquarePpt(pdfPath, "D:\\Temp\\merged2.pptx", "D:\\Temp\\MixTemplate.pptx");
-            using (var template = PresentationDocument.CreateFromTemplate(templatePath)) {
+            //using (var template = PresentationDocument.CreateFromTemplate(templatePath)) {
+
+           // using (var template = PresentationDocumentHelper.CreatePresenationAsMemoryStreamFromPdf(pdfPath)) {
+                //using (PresentationDocument template = PresentationDocument.Open(memStream, isEditable: true)){
+                using (PresentationDocument template = PresentationDocumentHelper.CreateFromPdf(pdfPath)) {
 
                 using (var output = template.Clone(destination)) {
                     // 3. Perform modifications on the new document (newDoc).

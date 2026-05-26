@@ -36,12 +36,12 @@
         <TextBox x:Name="FilenameTextBox" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalAlignment="Center" Text="" />
 
         <!-- Layout Selection -->
-        <TextBlock Text="Layout:" Grid.Row="3" VerticalAlignment="Center" Margin="5" />
-        <ComboBox x:Name="LayoutComboBox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" SelectedIndex="0">
-            <ComboBoxItem Content="Portrait" />
-            <ComboBoxItem Content="Landscape" />
-            <ComboBoxItem Content="Square" />
-        </ComboBox>
+        <!-- <TextBlock Text="Layout:" Grid.Row="3" VerticalAlignment="Center" Margin="5" /> -->
+        <!-- <ComboBox x:Name="LayoutComboBox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" SelectedIndex="0"> -->
+        <!--     <ComboBoxItem Content="Portrait" /> -->
+        <!--     <ComboBoxItem Content="Landscape" /> -->
+        <!--     <ComboBoxItem Content="Square" /> -->
+        <!-- </ComboBox> -->
         
         <!-- Split Button -->
         <Button Content="Convert PDF to PowerPoint" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="5" Padding="20,5" Click="ConvertPdfToPowerPoint_Click" />

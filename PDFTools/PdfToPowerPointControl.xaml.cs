@@ -57,19 +57,22 @@ public partial class PdfToPowerPointControl : UserControl {
         }
         
         try {
-            var layout = (LayoutComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
-            var templateName = layout switch {
-                "Portrait" => "PortraitTemplate.pptx",
-                "Landscape" => "LandscapeTemplate.pptx",
-                "Square" => "MixTemplate.pptx",
-                _ => "PortraitTemplate.pptx"
-            };
-            
-            var templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", templateName);
+            // var layout = (LayoutComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+            // var templateName = layout switch {
+            //     "Portrait" => "PortraitTemplate.pptx",
+            //     "Landscape" => "LandscapeTemplate.pptx",
+            //     "Square" => "MixTemplate.pptx",
+            //     _ => "PortraitTemplate.pptx"
+            // };
+            //
+            //var templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", templateName);
             var destination = Path.Combine(outputDirectory, filename.EndsWith(".pptx") ? filename : filename + ".pptx");
 
             var pdfSharpHelper = new PdfLibrary.PdfSharp.PdfHelper();
-            using (var template = PresentationDocument.CreateFromTemplate(templatePath)) {
+            
+            using (PresentationDocument template = MergePowerpoints.OpenXml.PresentationDocumentHelper.CreateFromPdf(pdfPath)) {
+                
+           // using (var template = PresentationDocument.CreateFromTemplate(templatePath)) {
 
                 using (var output = template.Clone(destination)) {
                     using (var stream = new MemoryStream(File.ReadAllBytes(pdfPath))) {
@@ -79,6 +82,7 @@ public partial class PdfToPowerPointControl : UserControl {
                         var i = 0;
                         foreach (var piece in pieces) {
                             i++;
+                            Debug.WriteLine($"Processing page {i} of {pieces.Count()}");
                             Spire.Pdf.PdfDocument doc = new Spire.Pdf.PdfDocument();
 
                             // 2. Load a sample PDF document
